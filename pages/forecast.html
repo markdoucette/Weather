@@ -9,7 +9,8 @@ Days: <a href="#/forecast/2" ng-class="{'bg-primary': days === '2'}">2</a> | <a 
 	
 	<div class="row">
 		<div class="col-md-12">
-		<weather-report weather-day="w" ></weather-report>
+		<weather-report weather-day="w" date-format="MMM d, y" convert-temp="convertKelvinToCelsius(degK)"
+						convert-to-date="convertToDate(dt)"></weather-report>
 		</div>
 	</div>
 </div>

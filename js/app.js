@@ -32,12 +32,16 @@ weatherApp.service('cityService', function(){
 /*
  * Home controller
  */
- weatherApp.controller('homeController', ['$scope', 'cityService', function($scope, cityService) {
+ weatherApp.controller('homeController', ['$scope', '$location', 'cityService', function($scope, $location, cityService) {
  	$scope.city = cityService.city;
 
  	$scope.$watch('city', function() {
  		cityService.city = $scope.city;
  	});
+
+ 	$scope.submit = function() {
+ 		$location.path('/forecast');
+ 	};
  }]);
 
 /*
@@ -63,6 +67,7 @@ weatherApp.service('cityService', function(){
  	$scope.convertToDate = function(date) {
  		return new Date(date * 1000);
  	};
+
  }]);
 
 // Directives
@@ -70,6 +75,13 @@ weatherApp.directive('weatherReport', function() {
 	return {
 		restrict: 'E',
 		templateUrl: 'directives/weatherReport.html', 
-		replace: true
+		replace: true,
+		scope: {
+			weatherDay: "=",
+			dateFormat: "@",
+			convertTemp: "&",
+			convertToDate: "&"
+
+		}
 	}
 });
